@@ -5,7 +5,7 @@ export interface Props {
   ogImage?: string;
 }
 
-const { title = 'ooo', description = 'out of office', ogImage } = Astro.props;
+const { title = "ooo", description = "out of office", ogImage } = Astro.props;
 const site = import.meta.env.SITE;
 const canonical = new URL(Astro.url.pathname, site).toString();
 const base = import.meta.env.BASE_URL;
@@ -20,6 +20,9 @@ const base = import.meta.env.BASE_URL;
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
 
+    <!-- Favicon -->
+    <link rel="icon" href={`${base}favicon.svg`} type="image/svg+xml" />
+
     <meta property="og:site_name" content="ooo" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -33,28 +36,139 @@ const base = import.meta.env.BASE_URL;
     {ogImage && <meta name="twitter:image" content={ogImage} />}
 
     <title>{title}</title>
-
-    <link rel="stylesheet" href={`${base}styles/tailwind.css`} />
   </head>
-  <body class="min-h-full bg-white text-slate-900 dark:bg-slate-900 dark:text-slate-100">
+  <body
+    class="min-h-full bg-white text-slate-900 dark:bg-slate-900 dark:text-slate-100"
+  >
     <header class="border-b border-slate-200/70 dark:border-slate-700/50">
-      <div class="mx-auto max-w-3xl px-4 py-6 flex items-center justify-between">
-        <a href={base} class="font-semibold tracking-tight">ooo</a>
-        <nav class="space-x-4">
-          <a href={`${base}posts`} class="hover:underline">Blog</a>
-          <a href={`${base}tags`} class="hover:underline">Tags</a>
-          <a href={`${base}rss.xml`} class="hover:underline">RSS</a>
+      <div class="mx-auto max-w-4xl px-4 py-6">
+        <div class="md:flex md:items-center md:justify-between md:space-x-5">
+          <div class="flex items-start space-x-5">
+            <div class="shrink-0">
+              <div class="relative">
+                <img
+                  class="size-16 rounded-full dark:outline dark:-outline-offset-1 dark:outline-white/10"
+                  src={`${base}favicon.svg`}
+                  alt="ooo logo"
+                />
+                <span
+                  class="absolute inset-0 rounded-full shadow-inner"
+                  aria-hidden="true"></span>
+              </div>
+            </div>
+            <div class="pt-1.5">
+              <h1 class="text-2xl font-bold text-gray-900 dark:text-white">
+                <a
+                  href={base}
+                  class="hover:text-gray-700 dark:hover:text-gray-300">ooo</a
+                >
+              </h1>
+              <p class="text-sm font-medium text-gray-500 dark:text-gray-400">
+                out of office
+              </p>
+            </div>
+          </div>
+          <div
+            class="mt-6 flex flex-col-reverse justify-stretch space-y-4 space-y-reverse sm:flex-row-reverse sm:justify-end sm:space-y-0 sm:space-x-3 sm:space-x-reverse md:mt-0 md:flex-row md:space-x-3"
+          >
+            <a
+              href={`${base}rss.xml`}
+              class="inline-flex items-center justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-xs ring-1 ring-inset ring-gray-300 hover:bg-gray-50 dark:bg-white/10 dark:text-white dark:shadow-none dark:ring-white/5 dark:hover:bg-white/20"
+            >
+              RSS
+            </a>
+            <a
+              href="https://github.com/nicolasmondain/ooo"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center justify-center rounded-md bg-gray-900 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-gray-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900 dark:bg-gray-800 dark:shadow-none dark:hover:bg-gray-700 dark:focus-visible:outline-gray-800"
+            >
+              GitHub
+            </a>
+          </div>
+        </div>
+
+        <!-- Navigation -->
+        <nav
+          class="mt-6 border-t border-slate-200/70 dark:border-slate-700/50 pt-4"
+        >
+          <div class="flex space-x-6">
+            <a
+              href={`${base}posts`}
+              class="text-sm font-medium text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+            >
+              All Posts
+            </a>
+            <a
+              href={`${base}tags`}
+              class="text-sm font-medium text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+            >
+              Tags
+            </a>
+          </div>
         </nav>
       </div>
     </header>
 
-    <main class="mx-auto max-w-3xl px-4 py-10">
+    <main class="mx-auto max-w-4xl px-4 py-10">
       <slot />
     </main>
 
-    <footer class="border-t border-slate-200/70 dark:border-slate-700/50">
-      <div class="mx-auto max-w-3xl px-4 py-8 text-sm text-slate-500">
-        © {new Date().getFullYear()} — ooo
+    <footer class="bg-white dark:bg-gray-900">
+      <div
+        class="mx-auto max-w-7xl px-6 py-12 md:flex md:items-center md:justify-between lg:px-8"
+      >
+        <div class="flex justify-center gap-x-6 md:order-2">
+          <a
+            href="https://github.com/nicolasmondain"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-white"
+          >
+            <span class="sr-only">GitHub</span>
+            <svg
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              aria-hidden="true"
+              class="size-6"
+            >
+              <path
+                d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                clip-rule="evenodd"
+                fill-rule="evenodd"></path>
+            </svg>
+          </a>
+          <a
+            href={`${base}rss.xml`}
+            class="text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-white"
+          >
+            <span class="sr-only">RSS Feed</span>
+            <svg
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              aria-hidden="true"
+              class="size-6"
+            >
+              <path
+                d="M3.429 2.571c9.698 0 17.571 7.873 17.571 17.571h-3.429c0-7.714-6.429-14.143-14.142-14.143V2.571zM3.429 9.143c4.286 0 7.714 3.429 7.714 7.714H7.714c0-2.286-1.714-4-4-4V9.143zM6.857 16c0 1.143-.857 2-2 2s-2-.857-2-2 .857-2 2-2 2 .857 2 2z"
+              ></path>
+            </svg>
+          </a>
+          <!-- Add your other social links here, for example: -->
+          <!--
+          <a href="https://twitter.com/yourusername" target="_blank" rel="noopener noreferrer" class="text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-white">
+            <span class="sr-only">X</span>
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="size-6">
+              <path d="M13.6823 10.6218L20.2391 3H18.6854L12.9921 9.61788L8.44486 3H3.2002L10.0765 13.0074L3.2002 21H4.75404L10.7663 14.0113L15.5685 21H20.8131L13.6819 10.6218H13.6823ZM11.5541 13.0956L10.8574 12.0991L5.31391 4.16971H7.70053L12.1742 10.5689L12.8709 11.5655L18.6861 19.8835H16.2995L11.5541 13.096V13.0956Z" />
+            </svg>
+          </a>
+          -->
+        </div>
+        <p
+          class="mt-8 text-center text-sm/6 text-gray-600 md:order-1 md:mt-0 dark:text-gray-400"
+        >
+          &copy; {new Date().getFullYear()} ooo — out of office. All rights reserved.
+        </p>
       </div>
     </footer>
   </body>
