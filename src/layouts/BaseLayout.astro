@@ -5,7 +5,7 @@ export interface Props {
   ogImage?: string;
 }
 
-const { title = "ooo", description = "out of office", ogImage } = Astro.props;
+const { title = 'ooo', description = 'out of office', ogImage } = Astro.props;
 const site = import.meta.env.SITE;
 const canonical = new URL(Astro.url.pathname, site).toString();
 const base = import.meta.env.BASE_URL;
@@ -36,6 +36,10 @@ const base = import.meta.env.BASE_URL;
     {ogImage && <meta name="twitter:image" content={ogImage} />}
 
     <title>{title}</title>
+    <link
+      rel="stylesheet"
+      href={`https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css`}
+    />
   </head>
   <body
     class="min-h-full bg-white text-slate-900 dark:bg-slate-900 dark:text-slate-100"
@@ -72,10 +76,11 @@ const base = import.meta.env.BASE_URL;
             class="mt-6 flex flex-col-reverse justify-stretch space-y-4 space-y-reverse sm:flex-row-reverse sm:justify-end sm:space-y-0 sm:space-x-3 sm:space-x-reverse md:mt-0 md:flex-row md:space-x-3"
           >
             <a
-              href={`${base}rss.xml`}
+              href={`${base}tags`}
               class="inline-flex items-center justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-xs ring-1 ring-inset ring-gray-300 hover:bg-gray-50 dark:bg-white/10 dark:text-white dark:shadow-none dark:ring-white/5 dark:hover:bg-white/20"
             >
-              RSS
+              <i class="fas fa-tags"></i>
+              &nbsp; Tags
             </a>
             <a
               href="https://github.com/nicolasmondain/ooo"
@@ -83,30 +88,11 @@ const base = import.meta.env.BASE_URL;
               rel="noopener noreferrer"
               class="inline-flex items-center justify-center rounded-md bg-gray-900 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-gray-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900 dark:bg-gray-800 dark:shadow-none dark:hover:bg-gray-700 dark:focus-visible:outline-gray-800"
             >
-              GitHub
+              <i class="fab fa-github"></i>
+              &nbsp; GitHub
             </a>
           </div>
         </div>
-
-        <!-- Navigation -->
-        <nav
-          class="mt-6 border-t border-slate-200/70 dark:border-slate-700/50 pt-4"
-        >
-          <div class="flex space-x-6">
-            <a
-              href={`${base}posts`}
-              class="text-sm font-medium text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
-            >
-              All Posts
-            </a>
-            <a
-              href={`${base}tags`}
-              class="text-sm font-medium text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
-            >
-              Tags
-            </a>
-          </div>
-        </nav>
       </div>
     </header>
 
@@ -138,22 +124,6 @@ const base = import.meta.env.BASE_URL;
                 fill-rule="evenodd"></path>
             </svg>
           </a>
-          <a
-            href={`${base}rss.xml`}
-            class="text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-white"
-          >
-            <span class="sr-only">RSS Feed</span>
-            <svg
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              aria-hidden="true"
-              class="size-6"
-            >
-              <path
-                d="M3.429 2.571c9.698 0 17.571 7.873 17.571 17.571h-3.429c0-7.714-6.429-14.143-14.142-14.143V2.571zM3.429 9.143c4.286 0 7.714 3.429 7.714 7.714H7.714c0-2.286-1.714-4-4-4V9.143zM6.857 16c0 1.143-.857 2-2 2s-2-.857-2-2 .857-2 2-2 2 .857 2 2z"
-              ></path>
-            </svg>
-          </a>
           <!-- Add your other social links here, for example: -->
           <!--
           <a href="https://twitter.com/yourusername" target="_blank" rel="noopener noreferrer" class="text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-white">
@@ -167,7 +137,7 @@ const base = import.meta.env.BASE_URL;
         <p
           class="mt-8 text-center text-sm/6 text-gray-600 md:order-1 md:mt-0 dark:text-gray-400"
         >
-          &copy; {new Date().getFullYear()} ooo — out of office. All rights reserved.
+          &copy; {new Date().getFullYear()} ooo
         </p>
       </div>
     </footer>
