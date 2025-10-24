@@ -1,0 +1,37 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('posts', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 10);
+
+const base = import.meta.env.BASE_URL;
+---
+
+<BaseLayout>
+  <section class="mb-10">
+    <h1 class="text-3xl font-bold tracking-tight">ooo</h1>
+    <p class="mt-2 text-slate-600 dark:text-slate-400">out of office</p>
+  </section>
+
+  <section>
+    <h2 class="sr-only">Latest posts</h2>
+    <ul class="space-y-6">
+      {posts.map(({ slug, data }) => (
+        <li class="border-b border-slate-200/70 dark:border-slate-700/50 pb-6">
+          <a href={`${base}posts/${slug}/`} class="text-xl font-semibold hover:underline">
+            {data.title}
+          </a>
+          <div class="text-sm text-slate-500">
+            <time datetime={data.pubDate.toISOString()}>{data.pubDate.toDateString()}</time>
+          </div>
+          <p class="mt-2 text-slate-700 dark:text-slate-300">{data.description}</p>
+        </li>
+      ))}
+    </ul>
+    <div class="mt-8">
+      <a class="hover:underline" href={`${base}posts`}>All posts →</a>
+    </div>
+  </section>
+</BaseLayout>
