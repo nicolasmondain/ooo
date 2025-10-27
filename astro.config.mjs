@@ -6,7 +6,7 @@ import react from '@astrojs/react';
 export default defineConfig({
   site: 'https://nicolasmondain.github.io/ooo',
   base: '/ooo/',
-  integrations: [reacttailwind(), sitemap()],
+  integrations: [react(), tailwind(), sitemap()],
   markdown: {
     smartypants: true,
   },
