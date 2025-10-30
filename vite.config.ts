@@ -14,4 +14,11 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
+  // Configure for GitHub Pages deployment
+  // Change 'ooo' to your repository name
+  base: process.env.GITHUB_PAGES ? '/ooo/' : '/',
+  build: {
+    outDir: 'dist',
+    assetsDir: 'assets',
+  },
 })

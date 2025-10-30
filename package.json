@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "build:gh-pages": "GITHUB_PAGES=true npm run build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
@@ -15,9 +16,14 @@
     "@tailwindcss/vite": "^4.1.16",
     "autoprefixer": "^10.4.21",
     "clsx": "^2.1.1",
+    "date-fns": "^4.1.0",
+    "gray-matter": "^4.0.3",
     "motion": "^12.23.24",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
+    "react-markdown": "^10.1.0",
+    "react-router-dom": "^7.9.5",
+    "remark-gfm": "^4.0.1",
     "tailwindcss": "^4.1.16"
   },
   "devDependencies": {
