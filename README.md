@@ -1,281 +1,242 @@
-# 📝 Modern Static Blog with Spotlight Design
+# Modern Static Blog
 
-A beautiful, fast, and fully-featured static blog built with React, TypeScript, Vite, and the Spotlight design system from Tailwind UI. Perfect for hosting on GitHub Pages.
+A fast, static blog built with React, TypeScript, Vite, and Spotlight design system. Deployable to GitHub Pages.
 
-![React](https://img.shields.io/badge/React-19.1-blue) ![TypeScript](https://img.shields.io/badge/TypeScript-5.9-blue) ![Tailwind CSS](https://img.shields.io/badge/Tailwind-v4-06B6D4) ![Vite](https://img.shields.io/badge/Vite-7.1-646CFF)
+## Features
 
-## ✨ Features
+- Markdown articles with GFM support
+- Dark mode with theme switching
+- Responsive design
+- SEO friendly
+- Automatic GitHub Pages deployment
+- Code splitting for articles
+- TypeScript throughout
 
-- 📝 **Markdown Support** - Write articles in Markdown with GFM support
-- 🎨 **Spotlight Design** - Beautiful design system from Tailwind UI
-- 🌓 **Dark Mode** - Seamless theme switching with next-themes
-- 📱 **Fully Responsive** - Works perfectly on all devices
-- ⚡ **Lightning Fast** - Vite for instant dev server and optimized builds
-- 🔍 **SEO Friendly** - Meta tags and semantic HTML
-- 🚀 **Easy Deployment** - Automatic deployment to GitHub Pages
-- 📦 **Code Splitting** - Articles loaded on demand
-- 🎯 **TypeScript** - Fully typed for better DX
-- ♿ **Accessible** - Built with Headless UI components
-- 🖼️ **Photo Gallery** - Beautiful photo grid on homepage
-- 📧 **Newsletter Form** - Built-in newsletter signup component
-- 💼 **Resume Section** - Showcase your work experience
-
-## 🚀 Quick Start
+## Quick Start
 
 ```bash
-# Install dependencies
 npm install
-
-# Start development server
 npm run dev
-
-# Build for production
-npm run build
-
-# Preview production build
-npm run preview
 ```
 
-Visit `http://localhost:5173` to see your blog!
+Visit `http://localhost:5173`
 
-## 📂 Project Structure
+## Project Structure
 
 ```
-ooo/
-├── .github/
-│   └── workflows/
-│       └── deploy.yml          # Automatic deployment to GitHub Pages
-├── public/
-│   ├── 404.html                # SPA routing fallback
-│   └── vite.svg
-├── src/
-│   ├── components/             # Catalyst UI components
-│   │   ├── alert.tsx
-│   │   ├── button.tsx
-│   │   ├── link.tsx            # Integrated with React Router
-│   │   └── ...                 # 27+ components
-│   ├── data/
-│   │   ├── articles.json       # Article metadata
-│   │   └── articles/           # Markdown articles
-│   │       ├── getting-started-with-react.md
-│   │       └── ...
-│   ├── lib/
-│   │   └── articles.ts         # Article utilities
-│   ├── pages/
-│   │   ├── Home.tsx            # Blog homepage
-│   │   ├── Article.tsx         # Article detail page
-│   │   └── About.tsx           # About page
-│   ├── App.tsx                 # Main app with routing
-│   ├── main.tsx
-│   └── index.css               # Tailwind CSS v4 config
-├── index.html
-├── vite.config.ts              # Vite + Tailwind config
-├── DEPLOYMENT.md               # Deployment guide
-└── package.json
+src/
+├── components/          # Catalyst UI + Spotlight components
+├── data/
+│   ├── articles.json    # Article metadata
+│   └── articles/        # Markdown files
+├── pages/
+│   ├── Home.tsx
+│   ├── Article.tsx
+│   └── About.tsx
+├── lib/                 # Utilities
+└── App.tsx
 ```
 
-## ✍️ Writing Articles
+## Writing Articles
 
-### 1. Add Article Metadata
-
-Edit `src/data/articles.json`:
+### Add metadata to `src/data/articles.json`:
 
 ```json
 {
-  "id": "my-new-article",
-  "title": "My Amazing Article",
-  "slug": "my-new-article",
-  "excerpt": "A short description of the article",
+  "id": "article-slug",
+  "title": "Article Title",
+  "slug": "article-slug",
+  "excerpt": "Brief description",
   "author": "Your Name",
   "date": "2024-03-30",
   "readTime": "5 min read",
   "tags": ["React", "JavaScript"],
   "published": true,
-  "coverImage": "https://images.unsplash.com/photo-..."
+  "coverImage": "https://images.unsplash.com/..."
 }
 ```
 
-### 2. Create the Article Content
-
-Create `src/data/articles/my-new-article.md`:
+### Create `src/data/articles/article-slug.md`:
 
 ```markdown
-# My Amazing Article
+# Article Title
 
-Your content here with **markdown** support!
+Your content with **markdown** support.
 
 ## Subheading
 
 - Lists
 - Code blocks
 - Images
-- And more!
 ```
 
-### 3. Deploy
-
-```bash
-git add .
-git commit -m "Add new article"
-git push
-```
-
-GitHub Actions will automatically build and deploy your blog! 🎉
-
----
-
-## 🚢 Deployment to GitHub Pages
+## Deployment to GitHub Pages
 
 ### Automatic Deployment (Recommended)
 
-1. **Push to GitHub:**
+1. Push to GitHub:
    ```bash
+   git init
    git add .
    git commit -m "Initial commit"
    git push origin master
    ```
 
-2. **Enable GitHub Pages:**
-   - Go to Settings → Pages
+2. Enable GitHub Pages:
+   - Go to repository Settings → Pages
    - Source: **GitHub Actions**
 
-3. **Update base path in `vite.config.ts`:**
+3. Update base path in `vite.config.ts`:
    ```ts
    base: process.env.GITHUB_PAGES ? '/your-repo-name/' : '/',
    ```
 
-4. **Done!** Your blog will be at `https://username.github.io/repo-name/`
+Your blog will be at: `https://username.github.io/your-repo-name/`
 
-For detailed deployment instructions, see [DEPLOYMENT.md](./DEPLOYMENT.md).
+The GitHub Actions workflow (`.github/workflows/deploy.yml`) automatically deploys on every push to master.
 
-## 🎨 Customization
+### Manual Deployment
 
-### Change Colors
+```bash
+npm run build:gh-pages
+git add dist -f
+git commit -m "Deploy"
+git subtree push --prefix dist origin gh-pages
+```
 
-Update the theme in `src/index.css`:
+Set GitHub Pages source to `gh-pages` branch.
 
+### Custom Domain
+
+1. Create `public/CNAME`:
+   ```
+   yourdomain.com
+   ```
+
+2. Update `vite.config.ts`:
+   ```ts
+   base: '/',
+   ```
+
+3. Configure DNS with CNAME record pointing to: `your-username.github.io`
+
+## Customization
+
+### Change blog title
+
+Edit `src/components/spotlight/Header.tsx` and `index.html`
+
+### Update colors
+
+Edit `src/index.css`:
 ```css
 @theme {
-  --color-primary: #your-color;
+  --color-zinc-900: #your-color;
 }
 ```
 
-### Add New Pages
+### Add pages
 
-1. Create a page component in `src/pages/`
+1. Create component in `src/pages/`
 2. Add route in `src/App.tsx`:
    ```tsx
    <Route path="/new-page" element={<NewPage />} />
    ```
-3. Add navigation link in the navbar
 
-### Modify Layout
+## Tech Stack
 
-Edit `src/App.tsx` to change:
-- Navigation structure
-- Footer content
-- Overall layout
+**Core:** React 19, TypeScript 5.9, Vite 7.1
 
-## 🛠️ Tech Stack
+**Styling:** Tailwind CSS v4, Spotlight Design, next-themes
 
-### Core
-- **React 19** - UI library
-- **TypeScript 5.9** - Type safety
-- **Vite 7.1** - Build tool
+**Content:** React Router 7, React Markdown, remark-gfm, date-fns
 
-### Styling
-- **Tailwind CSS v4** - Utility-first CSS
-- **Spotlight Design** - Professional design system
-- **@tailwindcss/vite** - Tailwind Vite plugin
-- **next-themes** - Dark mode support
+**UI:** @headlessui/react, @heroicons/react, motion
 
-### Routing & Content
-- **React Router 7** - Client-side routing
-- **React Markdown** - Markdown rendering
-- **remark-gfm** - GitHub Flavored Markdown
-- **date-fns** - Date formatting
+## Configuration
 
-### UI Components
-- **@headlessui/react** - Accessible UI primitives
-- **@heroicons/react** - Icon library
-- **motion** - Animation library
+### Path Aliases
 
-## 📚 Documentation
-
-- [Deployment Guide](./DEPLOYMENT.md) - Detailed deployment instructions
-- [Catalyst Setup](./CATALYST_SETUP.md) - Catalyst UI Kit information
-- [Catalyst Docs](https://catalyst.tailwindui.com/docs) - Official Catalyst documentation
-- [Tailwind CSS v4](https://tailwindcss.com) - Tailwind documentation
-- [Vite Guide](https://vite.dev/guide/) - Vite documentation
-
-## 🚀 Getting Started (Detailed)
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Import using `@/`:
+```tsx
+import { Button } from '@/components/spotlight'
+import { getAllArticles } from '@/lib/articles'
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Configured in `tsconfig.app.json` and `vite.config.ts`.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Dark Mode
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Theme switching via `next-themes`. Toggle in header component.
+
+### Routing
+
+React Router with SPA fallback (`public/404.html`) for GitHub Pages compatibility.
+
+## Available Commands
+
+```bash
+npm run dev              # Development server
+npm run build            # Production build
+npm run build:gh-pages   # Build with GitHub Pages config
+npm run preview          # Preview production build
+npm run lint             # Run ESLint
 ```
+
+## Content Management
+
+### Draft articles
+
+Set `"published": false` in articles.json
+
+### Edit articles
+
+Modify markdown file or metadata, then commit and push. Auto-deployment rebuilds the site.
+
+### Article order
+
+Sorted by date (newest first). Change the `date` field to reorder.
+
+## Troubleshooting
+
+### Blank page after deployment
+
+- Check `base` path in `vite.config.ts` matches repository name
+- Check browser console for 404 errors
+
+### Build fails
+
+- Verify Node.js 18+
+- Check TypeScript errors: `npm run build`
+- Clear and reinstall: `rm -rf node_modules && npm install`
+
+### Images not loading
+
+- Use absolute paths from `public/` folder
+- Or use external URLs (Unsplash, etc.)
+- Check base path configuration
+
+### 404 on page refresh
+
+The `public/404.html` file handles SPA routing. Ensure it's included in the build.
+
+## Performance
+
+- Images are code-split by Vite
+- Each article loads on demand
+- Optimized production bundle with minification
+- Tree-shaking for unused code
+
+## SEO
+
+Update meta tags in `index.html`:
+```html
+<title>Your Blog Title</title>
+<meta name="description" content="Your description" />
+<meta property="og:title" content="Your Blog" />
+<meta property="og:image" content="https://..." />
+```
+
+## License
+
+MIT
