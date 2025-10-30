@@ -1,9 +1,18 @@
+import { useEffect, useState } from 'react'
 import { Container } from '@/components/spotlight'
 import { getAllTags } from '@/lib/articles'
 import avatarImage from '@/images/portrait.jpg'
 
 export default function About() {
-  const tags = getAllTags()
+  const [tags, setTags] = useState<string[]>([])
+
+  useEffect(() => {
+    async function loadTags() {
+      const allTags = await getAllTags()
+      setTags(allTags)
+    }
+    loadTags()
+  }, [])
 
   return (
     <Container className="mt-16 sm:mt-32">

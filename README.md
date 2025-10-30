@@ -4,13 +4,16 @@ A fast, static blog built with React, TypeScript, Vite, and Spotlight design sys
 
 ## Features
 
+- **GitHub Gists Integration** - Articles automatically fetched from your GitHub Gists
 - Markdown articles with GFM support
 - Dark mode with theme switching
 - Responsive design
 - SEO friendly
 - Automatic GitHub Pages deployment
 - Code splitting for articles
+- Random cover images for posts
 - TypeScript throughout
+- 5-minute cache for API calls
 
 ## Quick Start
 
@@ -39,35 +42,33 @@ src/
 
 ## Writing Articles
 
-### Add metadata to `src/data/articles.json`:
+Articles are automatically loaded from your GitHub Gists. The blog fetches public gists from the configured GitHub username and displays them as blog posts.
 
-```json
-{
-  "id": "article-slug",
-  "title": "Article Title",
-  "slug": "article-slug",
-  "excerpt": "Brief description",
-  "author": "Your Name",
-  "date": "2024-03-30",
-  "readTime": "5 min read",
-  "tags": ["React", "JavaScript"],
-  "published": true,
-  "coverImage": "https://images.unsplash.com/..."
-}
-```
+### Create a new article:
 
-### Create `src/data/articles/article-slug.md`:
+1. Go to https://gist.github.com
+2. Create a new public Gist with a `.md` file
+3. Write your article in Markdown
+4. Save the Gist
+5. The blog will automatically fetch and display it
 
-```markdown
-# Article Title
+### Article Properties:
 
-Your content with **markdown** support.
+- **Title**: Extracted from filename (e.g., `my-article.md` → "My Article")
+- **Slug**: Created from filename (URL-friendly)
+- **Excerpt**: From Gist description or first paragraphs
+- **Author**: Your GitHub username
+- **Date**: Gist's last updated date
+- **Read Time**: Auto-calculated from content
+- **Tags**: Auto-detected from content keywords
+- **Cover Image**: Randomly assigned (deterministic per article)
 
-## Subheading
+### Configure GitHub Username:
 
-- Lists
-- Code blocks
-- Images
+Edit `src/lib/articles.ts`:
+
+```ts
+const GITHUB_USERNAME = 'your-github-username'
 ```
 
 ## Deployment to GitHub Pages
@@ -187,15 +188,19 @@ npm run lint             # Run ESLint
 
 ### Draft articles
 
-Set `"published": false` in articles.json
+Mark Gists as secret (not public) to hide them from the blog
 
 ### Edit articles
 
-Modify markdown file or metadata, then commit and push. Auto-deployment rebuilds the site.
+Simply edit the Gist on GitHub. The blog will fetch the updated content automatically (cached for 5 minutes).
 
 ### Article order
 
-Sorted by date (newest first). Change the `date` field to reorder.
+Sorted by last updated date (newest first).
+
+### Cover Images
+
+Each article gets a randomly assigned cover image from `src/images/photos/`. The selection is deterministic based on the Gist ID, so the same article always displays the same image.
 
 ## Troubleshooting
 

@@ -1,6 +1,7 @@
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import clsx from 'clsx'
-import { getAllArticles } from '@/lib/articles'
+import { getAllArticles, type Article } from '@/lib/articles'
 import { formatDate } from '@/lib/formatDate'
 import { Button, Card, Container, GitHubIcon, LinkedInIcon, XIcon } from '@/components/spotlight'
 import image1 from '@/images/photos/image-1.jpg'
@@ -68,7 +69,7 @@ function SocialLink({
   )
 }
 
-function Article({ article }: { article: ReturnType<typeof getAllArticles>[0] }) {
+function Article({ article }: { article: Article }) {
   return (
     <Card as="article">
       <Card.Title href={`/article/${article.slug}`}>
@@ -215,7 +216,22 @@ function Photos() {
 }
 
 export default function Home() {
-  let articles = getAllArticles().slice(0, 4)
+  const [articles, setArticles] = useState<Article[]>([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    async function loadArticles() {
+      try {
+        const allArticles = await getAllArticles()
+        setArticles(allArticles.slice(0, 4))
+      } catch (error) {
+        console.error('Error loading articles:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
+    loadArticles()
+  }, [])
 
   return (
     <>
@@ -248,9 +264,15 @@ export default function Home() {
       <Container className="mt-24 md:mt-28">
         <div className="mx-auto grid max-w-xl grid-cols-1 gap-y-20 lg:max-w-none lg:grid-cols-2">
           <div className="flex flex-col gap-16">
-            {articles.map((article) => (
-              <Article key={article.slug} article={article} />
-            ))}
+            {loading ? (
+              <div className="text-center py-12">
+                <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-zinc-900 dark:border-zinc-100"></div>
+              </div>
+            ) : (
+              articles.map((article) => (
+                <Article key={article.slug} article={article} />
+              ))
+            )}
           </div>
           <div className="space-y-10 lg:pl-16 xl:pl-24">
             <Newsletter />

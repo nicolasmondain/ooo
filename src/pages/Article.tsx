@@ -33,7 +33,7 @@ export default function ArticlePage() {
 
       try {
         setLoading(true)
-        const articleData = getArticleBySlug(slug)
+        const articleData = await getArticleBySlug(slug)
         
         if (!articleData) {
           setError('Article not found')
@@ -118,11 +118,22 @@ export default function ArticlePage() {
                 <span className="ml-3">{formatDate(article.date)}</span>
               </time>
             </header>
+            
+            {article.coverImage && (
+              <div className="mt-8">
+                <img
+                  src={article.coverImage}
+                  alt={article.title}
+                  className="aspect-video w-full rounded-2xl object-cover outline-1 -outline-offset-1 outline-black/5 dark:outline-white/10"
+                />
+              </div>
+            )}
+            
             <div className="mt-8 prose dark:prose-invert">
               <ReactMarkdown 
                 remarkPlugins={[remarkGfm]}
                 components={{
-                  h1: ({ node, ...props }) => <h2 {...props} />,
+                  h1: (props) => <h2 {...props} />,
                 }}
               >
                 {content}
