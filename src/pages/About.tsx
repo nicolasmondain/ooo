@@ -1,141 +1,66 @@
-import { Heading, Text, Badge } from '@/components'
+import { Container } from '@/components/spotlight'
 import { getAllTags } from '@/lib/articles'
+import avatarImage from '@/images/portrait.jpg'
 
 export default function About() {
   const tags = getAllTags()
 
   return (
-    <div className="max-w-4xl mx-auto space-y-12">
-      {/* Hero */}
-      <div className="text-center space-y-4 py-12">
-        <Heading level={1} className="text-5xl font-bold">
-          About This Blog
-        </Heading>
-        <Text className="text-xl text-gray-600 dark:text-gray-400">
-          A place for sharing knowledge and ideas
-        </Text>
-      </div>
-
-      {/* Main Content */}
-      <div className="prose prose-lg dark:prose-invert max-w-none">
-        <section className="space-y-6">
-          <Heading level={2}>Welcome! 👋</Heading>
-          
-          <Text>
-            This blog is built with modern web technologies to demonstrate how you can create
-            a fast, beautiful, and maintainable static blog that can be hosted for free on
-            GitHub Pages.
-          </Text>
-
-          <Heading level={3}>Tech Stack</Heading>
-          
-          <ul className="space-y-3">
-            <li>
-              <strong>React</strong> - A JavaScript library for building user interfaces
-            </li>
-            <li>
-              <strong>Vite</strong> - Next generation frontend tooling for blazing fast development
-            </li>
-            <li>
-              <strong>TypeScript</strong> - For type-safe code and better developer experience
-            </li>
-            <li>
-              <strong>Tailwind CSS v4</strong> - Utility-first CSS framework for rapid UI development
-            </li>
-            <li>
-              <strong>Catalyst UI</strong> - Beautiful component system from Tailwind Labs
-            </li>
-            <li>
-              <strong>React Router</strong> - Client-side routing for a smooth navigation experience
-            </li>
-            <li>
-              <strong>React Markdown</strong> - Render markdown content as React components
-            </li>
-          </ul>
-
-          <Heading level={3}>Features</Heading>
-          
-          <ul className="space-y-3">
-            <li>📝 Write articles in Markdown</li>
-            <li>🎨 Beautiful UI with Catalyst components</li>
-            <li>🌓 Dark mode support</li>
-            <li>📱 Fully responsive design</li>
-            <li>⚡ Lightning fast performance</li>
-            <li>🔍 SEO friendly</li>
-            <li>🆓 Free hosting on GitHub Pages</li>
-            <li>🚀 Easy to deploy and maintain</li>
-          </ul>
-
-          <Heading level={3}>Content Organization</Heading>
-          
-          <Text>
-            All articles are managed through a simple JSON file that contains metadata,
-            while the actual content is written in Markdown files. This separation makes
-            it easy to manage and update content without touching code.
-          </Text>
-
-          <div className="bg-gray-100 dark:bg-gray-800 p-6 rounded-lg">
-            <Text className="font-mono text-sm">
-              src/data/articles.json → Article metadata<br />
-              src/data/articles/*.md → Article content
-            </Text>
+    <Container className="mt-16 sm:mt-32">
+      <div className="grid grid-cols-1 gap-y-16 lg:grid-cols-2 lg:grid-rows-[auto_1fr] lg:gap-y-12">
+        <div className="lg:pl-20">
+          <div className="max-w-xs px-2.5 lg:max-w-none">
+            <img
+              src={avatarImage}
+              alt=""
+              className="aspect-square rotate-3 rounded-2xl bg-zinc-100 object-cover dark:bg-zinc-800"
+            />
           </div>
-
-          <Heading level={3}>Topics Covered</Heading>
-          
-          <div className="flex flex-wrap gap-2 not-prose">
+        </div>
+        <div className="lg:order-first lg:row-span-2">
+          <h1 className="text-4xl font-bold tracking-tight text-zinc-800 sm:text-5xl dark:text-zinc-100">
+            I'm a developer. I live in the world, building great software.
+          </h1>
+          <div className="mt-6 space-y-7 text-base text-zinc-600 dark:text-zinc-400">
+            <p>
+              I've loved building things for as long as I can remember. From the early
+              days of tinkering with HTML in Notepad to crafting complex web applications
+              with modern frameworks, the journey has been incredible.
+            </p>
+            <p>
+              Today, I work with React, TypeScript, and the latest web technologies to
+              build fast, accessible, and beautiful user experiences. This blog is where
+              I share what I've learned along the way – from practical tutorials to
+              thoughts on web development trends and best practices.
+            </p>
+            <p>
+              When I'm not coding, you can find me contributing to open source projects,
+              experimenting with new technologies, or writing about software development.
+              I believe in building things that are not just functional, but also
+              delightful to use.
+            </p>
+            <p>
+              This blog is built with React, Vite, and Tailwind CSS, hosted on GitHub
+              Pages – a perfect example of how modern web development can be simple,
+              fast, and completely free to host.
+            </p>
+          </div>
+        </div>
+        <div className="lg:pl-20">
+          <ul className="space-y-4">
+            <li className="flex">
+              <span className="font-semibold text-zinc-900 dark:text-zinc-100">Topics I write about</span>
+            </li>
             {tags.map((tag) => (
-              <Badge key={tag} color="blue">
-                {tag}
-              </Badge>
+              <li key={tag} className="flex">
+                <span className="flex-auto text-sm text-zinc-600 dark:text-zinc-400">
+                  {tag}
+                </span>
+              </li>
             ))}
-          </div>
-        </section>
-
-        <section className="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700 space-y-6">
-          <Heading level={2}>Getting Started</Heading>
-          
-          <Text>
-            If you want to create your own blog using this template:
-          </Text>
-
-          <ol className="space-y-3">
-            <li>Clone the repository</li>
-            <li>Install dependencies with <code>npm install</code></li>
-            <li>Add your articles to <code>src/data/articles.json</code></li>
-            <li>Write your content in <code>src/data/articles/*.md</code></li>
-            <li>Customize the design to match your style</li>
-            <li>Deploy to GitHub Pages</li>
-          </ol>
-
-          <Text>
-            It's that simple! No database, no backend, no complicated setup. Just pure,
-            static HTML, CSS, and JavaScript that loads instantly and works everywhere.
-          </Text>
-        </section>
-
-        <section className="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700 space-y-6">
-          <Heading level={2}>Philosophy</Heading>
-          
-          <Text>
-            This blog embraces the JAMstack philosophy: <strong>J</strong>avaScript,
-            <strong>A</strong>PIs, and <strong>M</strong>arkup. By pre-rendering all pages
-            at build time, we achieve:
-          </Text>
-
-          <ul className="space-y-3">
-            <li>Better performance - No server-side processing</li>
-            <li>Better security - No server to hack</li>
-            <li>Better scalability - Serve from CDN</li>
-            <li>Better developer experience - Simple workflow</li>
           </ul>
-
-          <Text>
-            The future of the web is static, fast, and secure. Welcome aboard! 🚀
-          </Text>
-        </section>
+        </div>
       </div>
-    </div>
+    </Container>
   )
 }
-

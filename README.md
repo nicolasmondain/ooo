@@ -1,21 +1,24 @@
-# 📝 Modern Static Blog
+# 📝 Modern Static Blog with Spotlight Design
 
-A beautiful, fast, and fully-featured static blog built with React, TypeScript, Vite, and Catalyst UI Kit. Perfect for hosting on GitHub Pages.
+A beautiful, fast, and fully-featured static blog built with React, TypeScript, Vite, and the Spotlight design system from Tailwind UI. Perfect for hosting on GitHub Pages.
 
 ![React](https://img.shields.io/badge/React-19.1-blue) ![TypeScript](https://img.shields.io/badge/TypeScript-5.9-blue) ![Tailwind CSS](https://img.shields.io/badge/Tailwind-v4-06B6D4) ![Vite](https://img.shields.io/badge/Vite-7.1-646CFF)
 
 ## ✨ Features
 
-- 📝 **Markdown Support** - Write articles in Markdown with frontmatter
-- 🎨 **Beautiful UI** - Powered by Catalyst UI Kit and Tailwind CSS v4
-- 🌓 **Dark Mode** - Automatic dark mode support
+- 📝 **Markdown Support** - Write articles in Markdown with GFM support
+- 🎨 **Spotlight Design** - Beautiful design system from Tailwind UI
+- 🌓 **Dark Mode** - Seamless theme switching with next-themes
 - 📱 **Fully Responsive** - Works perfectly on all devices
 - ⚡ **Lightning Fast** - Vite for instant dev server and optimized builds
 - 🔍 **SEO Friendly** - Meta tags and semantic HTML
 - 🚀 **Easy Deployment** - Automatic deployment to GitHub Pages
-- 📦 **Code Splitting** - Automatic chunking for optimal load times
+- 📦 **Code Splitting** - Articles loaded on demand
 - 🎯 **TypeScript** - Fully typed for better DX
 - ♿ **Accessible** - Built with Headless UI components
+- 🖼️ **Photo Gallery** - Beautiful photo grid on homepage
+- 📧 **Newsletter Form** - Built-in newsletter signup component
+- 💼 **Resume Section** - Showcase your work experience
 
 ## 🚀 Quick Start
 
@@ -182,8 +185,9 @@ Edit `src/App.tsx` to change:
 
 ### Styling
 - **Tailwind CSS v4** - Utility-first CSS
-- **Catalyst UI** - Component library
+- **Spotlight Design** - Professional design system
 - **@tailwindcss/vite** - Tailwind Vite plugin
+- **next-themes** - Dark mode support
 
 ### Routing & Content
 - **React Router 7** - Client-side routing
